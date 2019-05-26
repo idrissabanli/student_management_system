@@ -74,7 +74,9 @@ class TableView(LoginRequiredMixin, TemplateView):
             for d in allsundays(timezone.now().year, table.weekday-1, semester_start_month):
                 dates.append(d)
         students = group.students.filter(is_published=True)
-        context['dates'] = dates
+        context['dates'] = sorted(dates)
         context['students'] = students
         context['group_subject'] = group_subject
+        context['year'] = timezone.now().year
+        context['per_year'] = 'I' if semester_start_month == 9 else 'II'
         return context

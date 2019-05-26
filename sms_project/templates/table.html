@@ -29,14 +29,15 @@
 
 </nav>
     <div class="container">
-    <h3>{{ group_subject.subject.name }} fənni üzrə gündəlik </h3>
+    <h3>{{ group_subject.subject.name }} fənni üzrə gündəlik ({{ year }} {{ per_year }} yarım  il üzrə)</h3>
     <table class="table table-bordered">
       <thead style="font-size: 9px">
         <tr>
             <th scope="col">#</th>
             {% for date in dates %}
-                <th scope="col">{{ date|date:'d-m-Y' }}</th>
+                <th scope="col">{{ date|date:'d/m' }}</th>
             {% endfor %}
+        <th scope="col">Total Point</th>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +49,8 @@
                 {% cell_value student date as cell %}
                 <td>{{ cell }}</td>
             {% endfor %}
+            {% total_point student group_subject as total %}
+            <th scope="row">{{ total }}</th>
         </tr>
       {% endfor %}
       </tbody>
